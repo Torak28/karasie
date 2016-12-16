@@ -3,7 +3,6 @@ function init() {
 	//Sam obiekt
 	var rect = new createjs.Shape();
 	//Kolor i wspolrzedne
-	rect.drawRect
 	rect.beginStroke("#000000");
 	rect.beginFill("red");
 	rect.graphics.drawRect(100,100,30,20);
