@@ -1,42 +1,54 @@
 var stage = new createjs.Stage("demoCanvas");
-var circle = new createjs.Shape();
+var rect = new createjs.Shape();
+//var rodzinaKarasi;
+var Jan = new Karas();
+var Nikita = new Karas();
+var Marek = new Karas();
 
-function Karas(trgtX, trgtY){
-    this.targetX = trgtX;
-    this.targetY = trgtY;
+
+function Karas(){
+	this.polozenie = [];
+	for (var i = 0; i < 2; i++) {
+		this.polozenie[i] = Math.random() * 200;
+	}
+	console.log(this.polozenie[0]);
+	console.log(this.polozenie[1]);
+
+	this.show = function() {
+		rect.graphics.beginFill("red");
+		rect.graphics.drawRect(this.polozenie[0], this.polozenie[1], 50, 20);
+		rect.graphics.endFill();
+		stage.addChild(rect);
+		stage.update();
+	}
 }
-function init(){
 
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
-    circle.x =100;
-    circle.y = 100;
-    stage.addChild(circle);
-    stage.update();
-    //Update stage will render next frame
+function init(){
+	Jan.show();
+	Nikita.show();
+	Marek.show();
 
 }
 
 createjs.Ticker.addEventListener("tick", handleTick);
 
 function handleTick(){
-    //Circle will move 10 units to the right.
-    var moveVector = getRandMoveVector();
-    circle.x += moveVector[0]*10;
-    circle.y += moveVector[1]*10;
-    //Will cause the circle to wrap back
-    if (circle.x > stage.canvas.width) { circle.x = 0; }
-    if (circle.y > stage.canvas.height) { circle.y = 0; }
-    stage.update();
+	rect.x += rect.x + 5;
+	rect.y += rect.y + 5;
+	if (rect.x > stage.canvas.width) { 
+		rect.x = 0; 
+	}
+	if (rect.y > stage.canvas.height) { 
+		rect.y = 0; 
+	}
+	stage.update();
 }
 
-function getRandMoveVector(){
-    var x = Math.random();
-    var y = Math.random();
+/*function populacjaKarasi(){
+	this.karasie = [];
+	this.wielkosc = iloscKarasi;
+	for (var i = 0; i < this.wielkosc; i++) {
+		this.karasie[i] = new Karas();
+	}
 
-    var vecLen = Math.sqrt(x*x + y*y);
-
-    x = x/vecLen;
-    y = y/vecLen;
-
-    return [x,y];
-}
+}*/
