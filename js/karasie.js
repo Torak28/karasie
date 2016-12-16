@@ -64,13 +64,10 @@ function handleTick(){
 
     var dist = naszKaras.distFromTarget();
 
-    if(dist < 5.0) {
-        console.error("weszło");
-        do {
-            var newTarget = getRandomTarget();
-            naszKaras.targetX = newTarget[0];
-            naszKaras.targetY = newTarget[1];
-        } while (naszKaras.distFromTarget() < 5);
+    if(dist < 3.0) {
+        var newTarget = getRandomTarget();
+        naszKaras.targetX = newTarget[0];
+        naszKaras.targetY = newTarget[1];
     }
 
     stage.update();
