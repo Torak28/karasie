@@ -8,14 +8,14 @@ function Karas(trgtX, trgtY, X, Y){
     this.targetY = trgtY;
     this.x = X;
     this.y = Y;
-    this.distFromTarget = updateDistFromTarget(this);
+    this.distFromTarget = function() {
+        var vecX = this.targetX - this.x;
+        var vecY = this.targetY  - this.y;
+        return Math.sqrt(vecX*vecX + vecY+vecY);
+    };
 }
 
-function updateDistFromTarget(ryba) {
-    var vecX = ryba.targetX - ryba.x;
-    var vecY = ryba.targetY  - ryba.y;
-    return Math.sqrt(vecX*vecX + vecY+vecY);
-}
+
 function getRandomTarget(){
     var x = Math.random()*stage.canvas.width;
     var y = Math.random()*stage.canvas.height;
@@ -55,21 +55,24 @@ function handleTick(){
     var moveVector = getMoveVector(naszKaras);
     var stepLength = 5;
 
-    naszKaras.x += moveVector[0]*stepLength;
-    naszKaras.y += moveVector[1]*stepLength;
-    naszKaras.distFromTarget = updateDistFromTarget(naszKaras);
-    if(naszKaras.distFromTarget < 4){
-        var newTarget = getRandomTarget();
-        naszKaras.targetX = newTarget[0];
-        naszKaras.targetY = newTarget[1];
-        naszKaras.distFromTarget = updateDistFromTarget(naszKaras);
-    }
-
     circle.x = naszKaras.x;
     circle.y = naszKaras.y;
-    //Will cause the circle to wrap back
-    if (circle.x > stage.canvas.width) { circle.x = 0; }
-    if (circle.y > stage.canvas.height) { circle.y = 0; }
+
+    naszKaras.x += moveVector[0]*stepLength;
+    naszKaras.y += moveVector[1]*stepLength;
+
+
+    var dist = naszKaras.distFromTarget();
+
+    if(dist < 5.0) {
+        console.error("weszło");
+        do {
+            var newTarget = getRandomTarget();
+            naszKaras.targetX = newTarget[0];
+            naszKaras.targetY = newTarget[1];
+        } while (naszKaras.distFromTarget() < 5);
+    }
+
     stage.update();
 }
 
