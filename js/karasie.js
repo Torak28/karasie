@@ -1,7 +1,7 @@
 var stage = new createjs.Stage("demoCanvas");
 
-
-var naszKaras;
+var karasie;
+var count = 20;
 
 function Karas(trgtX, trgtY, X, Y){
     this.karasShape = new createjs.Shape();
@@ -16,8 +16,46 @@ function Karas(trgtX, trgtY, X, Y){
         var vecY = this.targetY  - this.karasShape.y;
         return Math.sqrt(vecX*vecX + vecY+vecY);
     };
+
+    this.updatePosition = function (steps) {
+        var moveVector = this.getMoveVector();
+        this.karasShape.x += moveVector[0]*steps;
+        this.karasShape.y += moveVector[1]*steps;
+
+        var dist = this.distFromTarget();
+        if(dist < 3.0) {
+            var newTarget = getRandomTarget();
+            this.targetX = newTarget[0];
+            this.targetY = newTarget[1];
+        }
+    }
+
+    this.getMoveVector = function (){
+        var vectorX = this.targetX - this.karasShape.x;
+        var vectorY = this.targetY - this.karasShape.y;
+
+        var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
+
+        vectorX = vectorX / len;
+        vectorY = vectorY / len;
+
+        return [vectorX, vectorY];
+    }
 }
 
+function Family(karasCount) {
+    this.family = [];
+    for(var i = 0; i < karasCount; i++){
+        var position = getRandomTarget();
+        var target = getRandomTarget();
+        this.family[i] = new Karas(target[0],target[1],position[0],position[1]);
+    }
+
+    this.updateFamily = function (steps) {
+        for(var i = 0; i < this.family.length; i++)
+            this.family[i].updatePosition(steps);
+    }
+}
 
 function getRandomTarget(){
     var x = Math.random()*stage.canvas.width;
@@ -25,49 +63,22 @@ function getRandomTarget(){
 
     return [x,y];
 }
-function getMoveVector(ryba){
-    var vectorX = ryba.targetX - ryba.karasShape.x;
-    var vectorY = ryba.targetY - ryba.karasShape.y;
-
-    var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
-
-    vectorX = vectorX / len;
-    vectorY = vectorY / len;
-
-    return [vectorX, vectorY];
-}
 
 function init(){
+    karasie = new Family(count);
 
-
-    var target = getRandomTarget();
-    naszKaras = new Karas(target[0], target[1], 100, 100);
-
-    stage.addChild(naszKaras.karasShape);
+    for(var i=0; i< count; i++)
+        stage.addChild(karasie[i].karasShape);
     stage.update();
     //Update stage will render next frame
-
 }
 
 createjs.Ticker.addEventListener("tick", handleTick);
 
 function handleTick(){
     //Circle will move 10 units to the right.
-    var moveVector = getMoveVector(naszKaras);
-    var stepLength = 5;
 
-    naszKaras.karasShape.x += moveVector[0]*stepLength;
-    naszKaras.karasShape.y += moveVector[1]*stepLength;
-
-
-    var dist = naszKaras.distFromTarget();
-
-    if(dist < 3.0) {
-        var newTarget = getRandomTarget();
-        naszKaras.targetX = newTarget[0];
-        naszKaras.targetY = newTarget[1];
-    }
-
+    karasie.updateFamily(5);
     stage.update();
 }
 
