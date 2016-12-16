@@ -1,16 +1,19 @@
 var stage = new createjs.Stage("demoCanvas");
-var circle = new createjs.Shape();
+
 
 var naszKaras;
 
 function Karas(trgtX, trgtY, X, Y){
+    this.karasShape = new createjs.Shape();
+    this.karasShape.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
+    this.karasShape.x = X;
+    this.karasShape.y = Y;
+
     this.targetX = trgtX;
     this.targetY = trgtY;
-    this.x = X;
-    this.y = Y;
     this.distFromTarget = function() {
-        var vecX = this.targetX - this.x;
-        var vecY = this.targetY  - this.y;
+        var vecX = this.targetX - this.karasShape.x;
+        var vecY = this.targetY  - this.karasShape.y;
         return Math.sqrt(vecX*vecX + vecY+vecY);
     };
 }
@@ -23,8 +26,8 @@ function getRandomTarget(){
     return [x,y];
 }
 function getMoveVector(ryba){
-    var vectorX = ryba.targetX - ryba.x;
-    var vectorY = ryba.targetY - ryba.y;
+    var vectorX = ryba.targetX - ryba.karasShape.x;
+    var vectorY = ryba.targetY - ryba.karasShape.y;
 
     var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
 
@@ -36,13 +39,11 @@ function getMoveVector(ryba){
 
 function init(){
 
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
+
     var target = getRandomTarget();
     naszKaras = new Karas(target[0], target[1], 100, 100);
-    circle.x =naszKaras.x;
-    circle.y = naszKaras.y;
 
-    stage.addChild(circle);
+    stage.addChild(naszKaras.karasShape);
     stage.update();
     //Update stage will render next frame
 
@@ -55,11 +56,8 @@ function handleTick(){
     var moveVector = getMoveVector(naszKaras);
     var stepLength = 5;
 
-    circle.x = naszKaras.x;
-    circle.y = naszKaras.y;
-
-    naszKaras.x += moveVector[0]*stepLength;
-    naszKaras.y += moveVector[1]*stepLength;
+    naszKaras.karasShape.x += moveVector[0]*stepLength;
+    naszKaras.karasShape.y += moveVector[1]*stepLength;
 
 
     var dist = naszKaras.distFromTarget();
