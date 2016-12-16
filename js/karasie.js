@@ -1,14 +1,14 @@
 function init() {
-	var canvas = document.getElementById("Canvas");
-	var stage = new createjs.Stage(canvas);
-
+	var stage = new createjs.Stage("demoCanvas");
 	//Sam obiekt
-	var rect = new createjs.Graphics();
+	var rect = new createjs.Shape();
 	//Kolor i wspolrzedne
-	rect.beginFill("red");
-	rect.drawRect(20,20,100,50);
+	rect.graphics.beginFill("red");
+	rect.graphics.drawRect(100,100,30,20);
+	rect.graphics.endFill();
 	//Dodanie do stejdża
-	//stage.addChild(rect);
+	stage.addChild(rect);
 	//Jakiś apdejcik jeszcze nie
-	//stage.update();
+	stage.update();
+	//xd
 }
