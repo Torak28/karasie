@@ -4,7 +4,6 @@ function init() {
 	var rect = new createjs.Shape();
 	//Kolor i wspolrzedne
 	rect.drawRect
-	rect.setStrokeStyle(1);
 	rect.beginStroke("#000000");
 	rect.beginFill("red");
 	rect.graphics.drawRect(100,100,30,20);
