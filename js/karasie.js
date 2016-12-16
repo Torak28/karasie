@@ -3,16 +3,11 @@ function init() {
     var stage = new createjs.Stage(canvas);
 
     //Sam obiekt
-    var rect = new createjs.Rectangle(0,0,100,100);
+    var rect = new createjs.Shape();
     //Kolor i wspolrzedne
-    rect.graphics.beginFill("DeepSkyBlue");
-    //Nadpisanie XY
-    //circle.x = 100;
-    //circle.y = 100;
+    rect.graphics.beginFill("DeepSkyBlue").drawRect(20,20,100,50);
     //Dodanie do stejdża
-    stage.addChild(circle);
-
-
-    //Jakiś apdejcik jeszcze nie wiem co
+    stage.addChild(rect);
+    //Jakiś apdejcik jeszcze nie
     stage.update();
 }
