@@ -1,6 +1,6 @@
 function init() {
 	var stage = new createjs.Stage("demoCanvas");
-
+/*
 	//Sam obiekt
 	var rect = new createjs.Graphics();
 	//Kolor i wspolrzedne
@@ -13,4 +13,11 @@ function init() {
 	//Jakiś apdejcik jeszcze nie
 	stage.update();
 	//xd
+*/
+	var circle = new createjs.Shape();
+	circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+	circle.x = 100;
+	circle.y = 100;
+	stage.addChild(circle);
+	stage.update();
 }
