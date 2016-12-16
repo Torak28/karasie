@@ -5,8 +5,10 @@ function init() {
 	//Sam obiekt
 	var rect = new createjs.Graphics();
 	//Kolor i wspolrzedne
-	rect.beginFill("red");
-	rect.drawRect(20,20,100,50);
+ 	rect.drawCircle(0,0,30);
+	rect.setStrokeStyle(1);
+ 	rect.beginStroke("#000000");
+ 	rect.beginFill("red");
 	//Dodanie do stejdża
 	stage.addChild(rect);
 	//Jakiś apdejcik jeszcze nie
