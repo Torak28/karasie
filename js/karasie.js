@@ -14,8 +14,9 @@ function init() {
 	stage.update();
 	//xd
 */
-	var circle = new createjs.Shape();
-	circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+	var circle = new createjs.graphics();
+	circle.beginFill("DeepSkyBlue");
+	circle.drawCircle(0, 0, 50);
 	circle.x = 100;
 	circle.y = 100;
 	stage.addChild(circle);
