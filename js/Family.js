@@ -10,7 +10,11 @@ function Family(karasCount) {
     }
     console.log(this.family[0]);
     this.updateFamily = function (steps) {
-        for(var i = 0; i < this.family.length; i++)
+        for(var i = 0; i < this.family.length; i++){
             this.family[i].updatePosition(steps);
+            if(!this.family[i].alive)
+                stage.removeChildAt(i);
+        }
+
     }
 }
