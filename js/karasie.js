@@ -1,54 +1,74 @@
 var stage = new createjs.Stage("demoCanvas");
-var rect = new createjs.Shape();
-//var rodzinaKarasi;
-var Jan = new Karas();
-var Nikita = new Karas();
-var Marek = new Karas();
+var circle = new createjs.Shape();
 
+var naszKaras;
 
-function Karas(){
-	this.polozenie = [];
-	for (var i = 0; i < 2; i++) {
-		this.polozenie[i] = Math.random() * 200;
-	}
-	console.log(this.polozenie[0]);
-	console.log(this.polozenie[1]);
+function Karas(trgtX, trgtY, X, Y){
+    this.targetX = trgtX;
+    this.targetY = trgtY;
+    this.x = X;
+    this.y = Y;
+    this.distFromTarget = updateDistFromTarget(this);
+}
 
-	this.show = function() {
-		rect.graphics.beginFill("red");
-		rect.graphics.drawRect(this.polozenie[0], this.polozenie[1], 50, 20);
-		rect.graphics.endFill();
-		stage.addChild(rect);
-		stage.update();
-	}
+function updateDistFromTarget(ryba) {
+    var vecX = ryba.targetX - ryba.x;
+    var vecY = ryba.targetY  - ryba.y;
+    return Math.sqrt(vecX*vecX + vecY+vecY);
+}
+function getRandomTarget(){
+    var x = Math.random()*stage.canvas.width;
+    var y = Math.random()*stage.canvas.height;
+
+    return [x,y];
+}
+function getMoveVector(ryba){
+    var vectorX = ryba.targetX - ryba.x;
+    var vectorY = ryba.targetY - ryba.y;
+
+    var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
+
+    vectorX = vectorX / len;
+    vectorY = vectorY / len;
+
+    return [vectorX, vectorY];
 }
 
 function init(){
-	Jan.show();
-	Nikita.show();
-	Marek.show();
+
+    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
+    var target = getRandomTarget();
+    naszKaras = new Karas(target[0], target[1], 100, 100);
+    circle.x =naszKaras.x;
+    circle.y = naszKaras.y;
+
+    stage.addChild(circle);
+    stage.update();
+    //Update stage will render next frame
 
 }
 
 createjs.Ticker.addEventListener("tick", handleTick);
 
 function handleTick(){
-	rect.x += rect.x + 5;
-	rect.y += rect.y + 5;
-	if (rect.x > stage.canvas.width) { 
-		rect.x = 0; 
-	}
-	if (rect.y > stage.canvas.height) { 
-		rect.y = 0; 
-	}
-	stage.update();
+    //Circle will move 10 units to the right.
+    var moveVector = getMoveVector(naszKaras);
+    var stepLength = 5;
+
+    naszKaras.x += moveVector[0]*stepLength;
+    naszKaras.y += moveVector[1]*stepLength;
+    naszKaras.distFromTarget = updateDistFromTarget(naszKaras);
+    if(naszKaras.distFromTarget < 4){
+        var newTarget = getRandomTarget();
+        naszKaras.targetX = newTarget[0];
+        naszKaras.targetY = newTarget[1];
+        naszKaras.distFromTarget = updateDistFromTarget(naszKaras);
+    }
+
+    circle.x = naszKaras.x;
+    circle.y = naszKaras.y;
+    //Will cause the circle to wrap back
+    if (circle.x > stage.canvas.width) { circle.x = 0; }
+    if (circle.y > stage.canvas.height) { circle.y = 0; }
+    stage.update();
 }
-
-/*function populacjaKarasi(){
-	this.karasie = [];
-	this.wielkosc = iloscKarasi;
-	for (var i = 0; i < this.wielkosc; i++) {
-		this.karasie[i] = new Karas();
-	}
-
-}*/
