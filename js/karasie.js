@@ -1,6 +1,6 @@
 var stage = new createjs.Stage("demoCanvas");
 var circle = new createjs.Shape();
-
+var kar = new createjs.Bitmap("img/cookie.png");
 var naszKaras;
 
 function Karas(trgtX, trgtY, X, Y){
@@ -36,7 +36,10 @@ function getMoveVector(ryba){
 
 function init(){
 
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
+    kar.regX = kar.image.width * 0.5;
+    kar.regY = kar.image.height * 0.5;
+
+    circle = kar;
     var target = getRandomTarget();
     naszKaras = new Karas(target[0], target[1], 100, 100);
     circle.x =naszKaras.x;
