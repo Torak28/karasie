@@ -5,7 +5,7 @@ function init() {
 	//Sam obiekt
 	var rect = new createjs.Graphics();
 	//Kolor i wspolrzedne
-	rect.graphics.beginFill("red");
+	rect.beginFill("red");
 	rect.drawRect(20,20,100,50);
 	//Dodanie do stejdża
 	stage.addChild(rect);
