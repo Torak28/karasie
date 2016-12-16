@@ -3,7 +3,7 @@ function init() {
 	//Sam obiekt
 	var rect = new createjs.Shape();
 	//Kolor i wspolrzedne
-	rect.beginFill("red");
+	rect.graphics.beginFill("red");
 	rect.graphics.drawRect(100,100,30,20);
 	rect.graphics.endFill();
 	//Dodanie do stejdża
