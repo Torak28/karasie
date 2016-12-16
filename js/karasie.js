@@ -1,24 +1,17 @@
 function init() {
 	var stage = new createjs.Stage("demoCanvas");
-/*
 	//Sam obiekt
-	var rect = new createjs.Graphics();
+	var rect = new createjs.Shape();
 	//Kolor i wspolrzedne
- 	rect.drawCircle(0,0,30);
+	rect.drawRect
 	rect.setStrokeStyle(1);
- 	rect.beginStroke("#000000");
- 	rect.beginFill("red");
+	rect.beginStroke("#000000");
+	rect.beginFill("red");
+	rect.graphics.drawRect(100,100,30,20);
+	rect.graphics.endFill();
 	//Dodanie do stejdża
 	stage.addChild(rect);
 	//Jakiś apdejcik jeszcze nie
 	stage.update();
 	//xd
-*/
-	var circle = new createjs.graphics();
-	circle.beginFill("DeepSkyBlue");
-	circle.drawCircle(0, 0, 50);
-	circle.x = 100;
-	circle.y = 100;
-	stage.addChild(circle);
-	stage.update();
 }
