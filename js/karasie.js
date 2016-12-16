@@ -8,7 +8,7 @@ function init() {
 	rect.beginFill("red");
 	rect.drawRect(20,20,100,50);
 	//Dodanie do stejdża
-	stage.addChild(rect);
+	//stage.addChild(rect);
 	//Jakiś apdejcik jeszcze nie
-	stage.update();
+	//stage.update();
 }
