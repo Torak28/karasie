@@ -3,12 +3,12 @@ function init() {
     var stage = new createjs.Stage(canvas);
 
     //Sam obiekt
-    var circle = new createjs.Shape();
+    var rect = new createjs.Rectangle(0,0,100,100);
     //Kolor i wspolrzedne
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5);
+    rect.graphics.beginFill("DeepSkyBlue");
     //Nadpisanie XY
-    circle.x = 100;
-    circle.y = 100;
+    //circle.x = 100;
+    //circle.y = 100;
     //Dodanie do stejdża
     stage.addChild(circle);
 
