@@ -1,7 +1,8 @@
 var stage = new createjs.Stage("demoCanvas");
 
-var karasie;
-var count = 20;
+var count = 10;
+var karasie = new Family(count);
+
 
 function Karas(trgtX, trgtY, X, Y){
     this.karasShape = new createjs.Shape();
@@ -23,11 +24,14 @@ function Karas(trgtX, trgtY, X, Y){
         this.karasShape.y += moveVector[1]*steps;
 
         var dist = this.distFromTarget();
-        if(dist < 3.0) {
+
+        while(dist < 5.0){
             var newTarget = getRandomTarget();
             this.targetX = newTarget[0];
             this.targetY = newTarget[1];
+            dist = this.distFromTarget();
         }
+
     }
 
     this.getMoveVector = function (){
@@ -35,9 +39,10 @@ function Karas(trgtX, trgtY, X, Y){
         var vectorY = this.targetY - this.karasShape.y;
 
         var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
-
+        console.log("length" + len);
         vectorX = vectorX / len;
         vectorY = vectorY / len;
+        console.log("vectorX " + vectorX + " vectorY " + vectorY )
 
         return [vectorX, vectorY];
     }
@@ -50,7 +55,7 @@ function Family(karasCount) {
         var target = getRandomTarget();
         this.family[i] = new Karas(target[0],target[1],position[0],position[1]);
     }
-
+    console.log(this.family[0]);
     this.updateFamily = function (steps) {
         for(var i = 0; i < this.family.length; i++)
             this.family[i].updatePosition(steps);
@@ -65,10 +70,11 @@ function getRandomTarget(){
 }
 
 function init(){
-    karasie = new Family(count);
 
-    for(var i=0; i< count; i++)
-        stage.addChild(karasie[i].karasShape);
+    for(var i=0; i< count; i++){
+        stage.addChild(karasie.family[i].karasShape);
+    }
+
     stage.update();
     //Update stage will render next frame
 }
