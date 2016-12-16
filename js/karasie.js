@@ -1,6 +1,5 @@
 function init() {
-	var canvas = document.getElementById("Canvas");
-	var stage = new createjs.Stage(canvas);
+	var stage = new createjs.Stage("demoCanvas");
 
 	//Sam obiekt
 	var rect = new createjs.Graphics();
