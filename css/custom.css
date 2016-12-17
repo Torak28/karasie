@@ -123,6 +123,13 @@ blockquote cite:before {
     content: "\2014 \2009";
 }
 
+#buttonInit{
+    margin-top: 100px;
+}
+
+#panelInit{
+    margin-top: 150px;
+}
 /*----media queries---*/
 
 @media (min-width: 544px) {
