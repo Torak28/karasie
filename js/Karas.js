@@ -6,8 +6,8 @@ function Karas(trgtX, trgtY, X, Y){
 	//this.karasShape.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
 	this.karasShape.scaleX = 0.3;
 	this.karasShape.scaleY = 0.3;
-	this.karasShape.x = X - 5;
-	this.karasShape.y = Y - 5;
+	this.karasShape.x = X +5;
+	this.karasShape.y = Y +5;
 	this.childrenMade = 0;
 	this.eatenHasie = 0;
 
