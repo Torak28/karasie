@@ -129,6 +129,7 @@ blockquote cite:before {
 
 #buttonInit{
     width: 150px;
+    transition: 0.5s ease;
 }
 
 #sim{
