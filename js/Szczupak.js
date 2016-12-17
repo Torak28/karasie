@@ -6,6 +6,8 @@ function Szczupak(trgtX, trgtY, X, Y){
 	this.szczupakShape.x = X - 8;
 	this.szczupakShape.y = Y - 8;
 	this.canEat = true;
+	this.childrenMade = 0;
+	this.eatenKarasie = 0;
 	this.szczupakShape.scaleX = 0.17;
 	this.szczupakShape.scaleY = 0.17;
 
