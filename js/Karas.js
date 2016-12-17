@@ -4,14 +4,17 @@
 function Karas(trgtX, trgtY, X, Y){
 	this.karasShape = new createjs.Bitmap("img/karas_small.png");
 	//this.karasShape.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
-    this.karasShape.scaleX = 0.3;
-    this.karasShape.scaleY = 0.3;
+	this.karasShape.scaleX = 0.3;
+	this.karasShape.scaleY = 0.3;
 	this.karasShape.x = X - 5;
 	this.karasShape.y = Y - 5;
 
+	this.eatenHasie = 0;
+	this.justMadeChildren = false;
+
 	this.id = 0;
 	this.alive = true;
-	this.ticksToDeath = 50 + parseInt(Math.random()*200);
+	this.ticksToDeath = 150 + parseInt(Math.random()*200);
 	this.dodatek = 50;
 
 	this.targetX = trgtX;
