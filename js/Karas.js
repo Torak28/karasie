@@ -21,6 +21,16 @@ function Karas(trgtX, trgtY, X, Y){
 
     this.updatePosition = function (steps) {
         if(this.alive){
+            var foodAround = findHasie(this);
+            var hasOnLock = false;
+            if( foodAround[0] != -1){
+                this.targetX = foodAround[0];
+                this.targetY = foodAround[1];
+                hasOnLock = true;
+            }
+            if(hasOnLock)
+                eatHas(this);
+
             var moveVector = this.getMoveVector();
             //wykonujemy ruch
             this.karasShape.x += moveVector[0]*steps;
@@ -34,19 +44,19 @@ function Karas(trgtX, trgtY, X, Y){
                 this.karasShape.x -= moveVector[0]*steps;
                 this.karasShape.y -= moveVector[1]*steps;
 
-                var newTarget = getRandomTarget();
-                this.targetX = newTarget[0];
-                this.targetY = newTarget[1];
+                var nTarget = getRandomTarget();
+                this.targetX = nTarget[0];
+                this.targetY = nTarget[1];
 
                 moveVector = this.getMoveVector();
                 this.karasShape.x += moveVector[0]*steps;
                 this.karasShape.y += moveVector[1]*steps;
 
-                var dist = this.distFromTarget();
+                dist = this.distFromTarget();
                 collision = checkCollisions(this);
             }
 
-            while(dist < 5.0){
+            while(dist < 5.0 && !hasOnLock){
                 var newTarget = getRandomTarget();
                 this.targetX = newTarget[0];
                 this.targetY = newTarget[1];

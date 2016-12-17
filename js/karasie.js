@@ -1,13 +1,20 @@
 var stage = new createjs.Stage("demoCanvas");
 
-var count = 20;
+var count = 10;
 var karasie = new Family(count);
+var iloscJedzonka = 5;
+var hasie = new Hasie();
 
 function init(){
 
     for(var i=0; i< count; i++){
         stage.addChild(karasie.family[i].karasShape);
     }
+    for(var i=0; i< iloscJedzonka; i++){
+        stage.addChild(hasie.family[i].hasShape);
+        hasie.family[i].id = count+i;
+    }
+
 
     stage.update();
     //Update stage will render next frame
@@ -33,8 +40,8 @@ function checkCollisions(karas) {
         var dist = Math.sqrt(dx*dx + dy*dy);
 
         if(dist<=10.0){
-            console.log("distance " + dist);
-            console.log("Zderzenie!");
+            //console.log("distance " + dist);
+            //console.log("Zderzenie!");
             return true;
         }
 
@@ -43,4 +50,38 @@ function checkCollisions(karas) {
     return false;
 }
 
+function findHasie(karas) {
+
+    for(var i=0; i<iloscJedzonka; i++){
+        if(hasie.family[i].zjedzony)
+            continue;
+        var dx = karas.karasShape.x - hasie.family[i].hasShape.x;
+        var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+
+        if(dist<=50.0)
+            return [hasie.family[i].hasShape.x, hasie.family[i].hasShape.y ];
+
+    }
+    return [-1,-1];
+}
+
+function eatHas(karas) {
+
+    console.log(hasie.family[0]);
+    for(var i=0; i<iloscJedzonka; i++){
+        var dx = karas.karasShape.x - hasie.family[i].hasShape.x;
+        var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+
+        if(dist<=3.0) {
+            hasie.family[i].zjedzony = true;
+            hasie.updateHasie();
+            karas.ticksToDeath += hasie.family[i].dodatek;
+            return true;
+        }
+
+    }
+    return false;
+}
 
