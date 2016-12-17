@@ -1,4 +1,7 @@
 var stage = new createjs.Stage("demoCanvas");
+
+var background = new createjs.Bitmap("img/jeziorko.png");
+
 var karasCount = setKarasCount(20);
 var karasie = new Family(karasCount);
 var iloscJedzonka = setiloscJedzonka(20);
@@ -21,6 +24,7 @@ function setGranieNaCzekanie(liczba){
 }
 
 function init(){
+	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
 	}
