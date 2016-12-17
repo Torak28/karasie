@@ -2,7 +2,7 @@
  * Created by piotrek on 17.12.16.
  */
 function Karas(trgtX, trgtY, X, Y){
-	this.karasShape = new createjs.Bitmap("js/karas_small.png");
+	this.karasShape = new createjs.Bitmap("img/karas_small.png");
 	//this.karasShape.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
     this.karasShape.scaleX = 0.3;
     this.karasShape.scaleY = 0.3;

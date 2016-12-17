@@ -2,7 +2,7 @@
  * Created by piotrek on 17.12.16.
  */
 function Szczupak(trgtX, trgtY, X, Y){
-    this.szczupakShape = new createjs.Bitmap("js/zymbok.png");
+    this.szczupakShape = new createjs.Bitmap("img/zymbok.png");
 	this.szczupakShape.x = X;
 	this.szczupakShape.y = Y;
 
