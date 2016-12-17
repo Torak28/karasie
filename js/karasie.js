@@ -1,4 +1,5 @@
 var stage = new createjs.Stage("demoCanvas");
+var background = new createjs.Bitmap("js/karas.png");
 
 var count = 10;
 var karasie = new Family(count);
@@ -6,6 +7,9 @@ var iloscJedzonka = 5;
 var hasie = new Hasie();
 
 function init(){
+
+
+
 
 	for(var i=0; i< count; i++){
 		stage.addChild(karasie.family[i].karasShape);
@@ -15,7 +19,9 @@ function init(){
 		hasie.family[i].id = count+i;
 	}
 
+
 	spawnHas();
+    stage.addChild(background);
 	stage.update();
 	//Update stage will render next frame
 }

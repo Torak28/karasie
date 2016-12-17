@@ -12,6 +12,7 @@ function Karas(trgtX, trgtY, X, Y){
 	this.id = 0;
 	this.alive = true;
 	this.ticksToDeath = 50 + parseInt(Math.random()*200);
+	this.dodatek = 50;
 
 	this.targetX = trgtX;
 	this.targetY = trgtY;
