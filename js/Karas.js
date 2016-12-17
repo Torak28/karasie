@@ -9,7 +9,7 @@ function Karas(trgtX, trgtY, X, Y){
 
     this.id = 0;
     this.alive = true;
-    this.ticksToDeath = 1000;
+    this.ticksToDeath = 50 + parseInt(Math.random()*200);
 
     this.targetX = trgtX;
     this.targetY = trgtY;
@@ -22,12 +22,31 @@ function Karas(trgtX, trgtY, X, Y){
     this.updatePosition = function (steps) {
         if(this.alive){
             var moveVector = this.getMoveVector();
+            //wykonujemy ruch
             this.karasShape.x += moveVector[0]*steps;
             this.karasShape.y += moveVector[1]*steps;
 
             var dist = this.distFromTarget();
             var collision = checkCollisions(this);
-            while(dist < 5.0 ){
+
+            while(collision){
+                //cofamy ruch bo kolizja
+                this.karasShape.x -= moveVector[0]*steps;
+                this.karasShape.y -= moveVector[1]*steps;
+
+                var newTarget = getRandomTarget();
+                this.targetX = newTarget[0];
+                this.targetY = newTarget[1];
+
+                moveVector = this.getMoveVector();
+                this.karasShape.x += moveVector[0]*steps;
+                this.karasShape.y += moveVector[1]*steps;
+
+                var dist = this.distFromTarget();
+                collision = checkCollisions(this);
+            }
+
+            while(dist < 5.0){
                 var newTarget = getRandomTarget();
                 this.targetX = newTarget[0];
                 this.targetY = newTarget[1];

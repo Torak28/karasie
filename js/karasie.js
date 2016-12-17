@@ -1,6 +1,6 @@
 var stage = new createjs.Stage("demoCanvas");
 
-var count = 3;
+var count = 20;
 var karasie = new Family(count);
 
 function init(){
