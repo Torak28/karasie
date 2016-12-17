@@ -5,7 +5,7 @@ var karasCount = setKarasCount(20);
 var karasie = new Family(karasCount);
 var iloscJedzonka = setiloscJedzonka(30);
 var hasie = new Hasie();
-var szczupakCount = setSzczupakCount(3);
+var szczupakCount = setSzczupakCount(4);
 var bandaSzczupakow = new Banda(szczupakCount);
 var granieNaCzekanie = setGranieNaCzekanie(200);
 
@@ -42,11 +42,12 @@ function init(){
 
 
 	spawnHas();
+    createjs.Ticker.addEventListener("tick", handleTick);
 	stage.update();
 	//Update stage will render next frame
 }
 
-createjs.Ticker.addEventListener("tick", handleTick);
+
 
 function handleTick(){
 	bornKarasie = 0;
