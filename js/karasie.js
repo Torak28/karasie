@@ -15,7 +15,7 @@ function init(){
         hasie.family[i].id = count+i;
     }
 
-
+    spawnHas();
     stage.update();
     //Update stage will render next frame
 }
@@ -68,7 +68,6 @@ function findHasie(karas) {
 
 function eatHas(karas) {
 
-    console.log(hasie.family[0]);
     for(var i=0; i<iloscJedzonka; i++){
         var dx = karas.karasShape.x - hasie.family[i].hasShape.x;
         var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
@@ -78,10 +77,16 @@ function eatHas(karas) {
             hasie.family[i].zjedzony = true;
             hasie.updateHasie();
             karas.ticksToDeath += hasie.family[i].dodatek;
+
             return true;
         }
 
     }
     return false;
+}
+
+function spawnHas() {
+    console.log("spawn");
+    hasie.addHas();
 }
 
