@@ -4,6 +4,9 @@ function Karas(trgtX, trgtY, X, Y){
 	this.karasShape.x = X;
 	this.karasShape.y = Y;
 
+	this.alive = true;
+	this.ticksToDeath = 50 + parseInt(Math.random()*200);
+
 	this.targetX = trgtX;
 	this.targetY = trgtY;
 	this.distFromTarget = function() {
@@ -13,19 +16,26 @@ function Karas(trgtX, trgtY, X, Y){
 	};
 
 	this.updatePosition = function (steps) {
-		var moveVector = this.getMoveVector();
-		this.karasShape.x += moveVector[0]*steps;
-		this.karasShape.y += moveVector[1]*steps;
+		console.log(this.alive);
+		if(this.alive){
+			var moveVector = this.getMoveVector();
+			this.karasShape.x += moveVector[0]*steps;
+			this.karasShape.y += moveVector[1]*steps;
 
-		var dist = this.distFromTarget();
+			var dist = this.distFromTarget();
 
-		while(dist < 5.0){
-			var newTarget = getRandomTarget();
-			this.targetX = newTarget[0];
-			this.targetY = newTarget[1];
-			dist = this.distFromTarget();
+			while(dist < 5.0){
+				var newTarget = getRandomTarget();
+				this.targetX = newTarget[0];
+				this.targetY = newTarget[1];
+				dist = this.distFromTarget();
+			}
+
+			this.ticksToDeath--;
+			console.log(this.ticksToDeath);
+			if(this.ticksToDeath == 0)
+				this.alive = false;
 		}
-
 	}
 
 	this.getMoveVector = function (){
@@ -33,10 +43,8 @@ function Karas(trgtX, trgtY, X, Y){
 		var vectorY = this.targetY - this.karasShape.y;
 
 		var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
-		console.log("length" + len);
 		vectorX = vectorX / len;
 		vectorY = vectorY / len;
-		console.log("vectorX " + vectorX + " vectorY " + vectorY )
 
 		return [vectorX, vectorY];
 	}
