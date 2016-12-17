@@ -123,8 +123,12 @@ blockquote cite:before {
     content: "\2014 \2009";
 }
 
-#buttonInit{
+#buttonInitCol{
     margin-top: 100px;
+}
+
+#buttonInit{
+    width: 150px;
 }
 
 #panelInit{
