@@ -2,11 +2,12 @@ var stage = new createjs.Stage("demoCanvas");
 
 var karasCount = 20;
 var karasie = new Family(karasCount);
-var iloscJedzonka = 40;
+var iloscJedzonka = 30;
 var hasie = new Hasie();
-var szczupakCount = 3;
+var szczupakCount = 2;
 var bandaSzczupakow = new Banda(szczupakCount);
-
+var bornKarasie = 0;
+var maxBornKarasiePerTick = parseInt(0.5*karasCount);
 function init(){
 
     for(var i=0; i< karasCount; i++){
@@ -31,6 +32,7 @@ createjs.Ticker.addEventListener("tick", handleTick);
 
 function handleTick(){
     //Circle will move 10 units to the right.
+    bornKarasie = 0;
     bandaSzczupakow.updateBanda(3.5);
     karasie.updateFamily(3);
     stage.update();
@@ -47,16 +49,19 @@ function checkCollisions(karas) {
         var dist = Math.sqrt(dx*dx + dy*dy);
 
         if(dist<=10.0){
-            if(karas.eatenHasie >1 && !karas.justMadeChildren && karasie.family[i].eatenHasie > 1 && !karasie.family[i].justMadeChildren){
-                karasie.addKaras();
-                karas.justMadeChildren = true;
-                karasie.family[i].justMadeChildren = true;
-            }
-            else{
-                karas.justMadeChildren = false;
-                karasie.family[i].justMadeChildren = false;
-            }
+            if(bornKarasie < maxBornKarasiePerTick) {
 
+                if (karas.eatenHasie > 1 && !karas.justMadeChildren && karasie.family[i].eatenHasie > 1 && !karasie.family[i].justMadeChildren) {
+                    karasie.addKaras();
+                    karas.justMadeChildren = true;
+                    karasie.family[i].justMadeChildren = true;
+                }
+                else {
+                    karas.justMadeChildren = false;
+                    karasie.family[i].justMadeChildren = false;
+                }
+                bornKarasie++;
+            }
             //console.log("distance " + dist);
             console.log("Zderzenie!");
             return true;
@@ -98,7 +103,7 @@ function findHasie(karas) {
         var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
         var dist = Math.sqrt(dx*dx + dy*dy);
 
-        if(dist<=80.0)
+        if(dist<=100.0)
             return [hasie.family[i].hasShape.x, hasie.family[i].hasShape.y ];
 
     }
