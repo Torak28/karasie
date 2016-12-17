@@ -8,9 +8,9 @@ function Karas(trgtX, trgtY, X, Y){
 	this.karasShape.scaleY = 0.3;
 	this.karasShape.x = X - 5;
 	this.karasShape.y = Y - 5;
-
+	this.childrenMade = 0;
 	this.eatenHasie = 0;
-	this.justMadeChildren = false;
+
 
 	this.id = 0;
 	this.alive = true;
@@ -34,6 +34,7 @@ function Karas(trgtX, trgtY, X, Y){
 				this.targetY = foodAround[1];
 				hasOnLock = true;
 			}
+			//Jeśli Karaś jest na celu to spróbuj go zjeść!
 			if(hasOnLock)
 				eatHas(this);
 
@@ -60,6 +61,10 @@ function Karas(trgtX, trgtY, X, Y){
 
 				dist = this.distFromTarget();
 				collision = checkCollisions(this);
+				this.ticksToDeath--;
+                if(this.ticksToDeath == 0)
+                    this.alive = false;
+                return;
 			}
 
 			while(dist < 5.0 && !hasOnLock){

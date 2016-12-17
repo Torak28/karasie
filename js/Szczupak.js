@@ -5,7 +5,7 @@ function Szczupak(trgtX, trgtY, X, Y){
     this.szczupakShape = new createjs.Bitmap("img/zymbok.png");
 	this.szczupakShape.x = X - 8;
 	this.szczupakShape.y = Y - 8;
-
+	this.canEat = true;
 	this.szczupakShape.scaleX = 0.17;
 	this.szczupakShape.scaleY = 0.17;
 

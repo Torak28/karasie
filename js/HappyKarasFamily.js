@@ -19,7 +19,7 @@ function Family(karasCount) {
 		}
 	}
 	 this.addKaras = function () {
-		console.log("addkaras func");
+
 		var position = getRandomTarget();
 		var target = getRandomTarget();
 		//Jeśli są jakieś martwe karsie to je ożywiamy
@@ -27,7 +27,6 @@ function Family(karasCount) {
 		for(var i=0; i<karasCount; i++){
 			var alive = this.family[i].alive;
 			if(!alive){
-				console.log("karas spawn");
 				this.family[i].alive = true;
 				this.family[i].karasShape.x = position[0];
 				this.family[i].karasShape.y = position[1];

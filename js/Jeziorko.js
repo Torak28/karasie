@@ -2,16 +2,14 @@ var stage = new createjs.Stage("demoCanvas");
 
 var background = new createjs.Bitmap("img/jeziorko.png");
 
-var karasCount = setKarasCount(20);
+var karasCount = setKarasCount(25);
 var karasie = new Family(karasCount);
-var iloscJedzonka = setiloscJedzonka(30);
+var iloscJedzonka = setiloscJedzonka(60);
 var hasie = new Hasie();
-var szczupakCount = setSzczupakCount(4);
+var szczupakCount = setSzczupakCount(2);
 var bandaSzczupakow = new Banda(szczupakCount);
 var granieNaCzekanie = setGranieNaCzekanie(200);
-
-var bornKarasie = 0;
-var maxBornKarasiePerTick = parseInt(0.5*karasCount);
+var maxKarasChildren = 5;
 
 function setKarasCount(liczba){
 	return liczba;
@@ -66,19 +64,14 @@ function checkCollisions(karas) {
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
 		if(dist<=10.0){
-			if(bornKarasie < maxBornKarasiePerTick) {
+				if(karas.childrenMade < maxKarasChildren){
+                    if (karas.eatenHasie > 1 && karasie.family[i].eatenHasie > 1) {
+                        karasie.addKaras();
+                        karas.childrenMade++;
+                        karasie.family[i].childrenMade++;
+                    }
+				}
 
-				if (karas.eatenHasie > 1 && !karas.justMadeChildren && karasie.family[i].eatenHasie > 1 && !karasie.family[i].justMadeChildren) {
-					karasie.addKaras();
-					karas.justMadeChildren = true;
-					karasie.family[i].justMadeChildren = true;
-				}
-				else {
-					karas.justMadeChildren = false;
-					karasie.family[i].justMadeChildren = false;
-				}
-				bornKarasie++;
-			}
 			//console.log("distance " + dist);
 			console.log("Zderzenie!");
 			return true;
@@ -156,6 +149,7 @@ function eatHas(karas) {
 			hasie.updateHasie();
 			karas.ticksToDeath += hasie.family[i].dodatek;
 			karas.eatenHasie++;
+			karas.canMakeChildren = true;
 			return true;
 		}
 
@@ -170,15 +164,17 @@ function eatKaras(szczupak) {
 		var dy = szczupak.szczupakShape.y - karasie.family[i].karasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=3.0) {
+		if(dist<=3.0 && szczupak.canEat) {
+			console.log("Szczupak je");
 			karasie.family[i].alive = false; //R.I.P ; <
 			karasie.family[i].ticksToDeath = 0;
 			//karasie.updateFamily();
-
+			szczupak.canEat=false;
 			szczupak.ticksToDeath += karasie.family[i].dodatek;
 			return true;
 		}
-
+        console.log("Szczupak nie je");
+		szczupak.canEat=true;
 	}
 	return false;
 }
