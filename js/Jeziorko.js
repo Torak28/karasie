@@ -2,7 +2,7 @@ var stage = new createjs.Stage("demoCanvas");
 
 var karasCount = 20;
 var karasie = new Family(karasCount);
-var iloscJedzonka = 15;
+var iloscJedzonka = 40;
 var hasie = new Hasie();
 var szczupakCount = 3;
 var bandaSzczupakow = new Banda(szczupakCount);
@@ -31,8 +31,8 @@ createjs.Ticker.addEventListener("tick", handleTick);
 
 function handleTick(){
     //Circle will move 10 units to the right.
-    bandaSzczupakow.updateBanda(5.5);
-    karasie.updateFamily(5);
+    bandaSzczupakow.updateBanda(3.5);
+    karasie.updateFamily(3);
     stage.update();
 }
 
@@ -47,8 +47,18 @@ function checkCollisions(karas) {
         var dist = Math.sqrt(dx*dx + dy*dy);
 
         if(dist<=10.0){
+            if(karas.eatenHasie >1 && !karas.justMadeChildren && karasie.family[i].eatenHasie > 1 && !karasie.family[i].justMadeChildren){
+                karasie.addKaras();
+                karas.justMadeChildren = true;
+                karasie.family[i].justMadeChildren = true;
+            }
+            else{
+                karas.justMadeChildren = false;
+                karasie.family[i].justMadeChildren = false;
+            }
+
             //console.log("distance " + dist);
-            //console.log("Zderzenie!");
+            console.log("Zderzenie!");
             return true;
         }
 
@@ -68,7 +78,7 @@ function checkSzczupakCollisions(szczupak) {
         var dy = szczupak.szczupakShape.y - bandaSzczupakow.family[i].szczupakShape.y;
         var dist = Math.sqrt(dx*dx + dy*dy);
 
-        if(dist<=10.0){
+        if(dist<=14.0){
             //console.log("distance " + dist);
             //console.log("Zderzenie!");
             return true;
@@ -122,7 +132,7 @@ function eatHas(karas) {
             hasie.family[i].zjedzony = true;
             hasie.updateHasie();
             karas.ticksToDeath += hasie.family[i].dodatek;
-
+            karas.eatenHasie++;
             return true;
         }
 
@@ -151,7 +161,6 @@ function eatKaras(szczupak) {
 }
 
 function spawnHas() {
-    console.log("spawn");
     hasie.addHas();
 }
 
