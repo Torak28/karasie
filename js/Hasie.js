@@ -32,6 +32,6 @@ function Hasie(){
                 break;
             }
         }
-        setTimeout(spawnHas,1000);
+        setTimeout(spawnHas,400);
     }
 }
