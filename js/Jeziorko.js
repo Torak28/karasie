@@ -26,7 +26,10 @@ function setGranieNaCzekanie(liczba){
 	return liczba;
 }
 
-function init(){
+function start(){
+
+    createjs.Ticker.addEventListener("tick", handleTick);
+
 	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
@@ -46,7 +49,7 @@ function init(){
 	//Update stage will render next frame
 }
 
-createjs.Ticker.addEventListener("tick", handleTick);
+
 
 function handleTick(){
 	bornKarasie = 0;
