@@ -25,7 +25,7 @@ function setGranieNaCzekanie(liczba){
 	return liczba;
 }
 
-function init(){
+function start(){
 	console.log("xd");
 	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
