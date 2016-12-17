@@ -1,30 +1,39 @@
 var stage = new createjs.Stage("demoCanvas");
 var background = new createjs.Bitmap("img/jeziorko.png");
 
-var karasCount = setKarasCount(25);
+var karasCount = setKarasCount();
 var karasie = new Family(karasCount);
 var iloscJedzonka = setiloscJedzonka(60);
 var hasie = new Hasie();
-var szczupakCount = setSzczupakCount(2);
+var szczupakCount = setSzczupakCount();
 var bandaSzczupakow = new Banda(szczupakCount);
 var granieNaCzekanie = setGranieNaCzekanie(200);
 var maxKarasChildren = 5;
 
-function setKarasCount(liczba){
-	return liczba;
+function setKarasCount(){
+	return parseInt(document.getElementById("poleKarasie").value);
 }
 function setiloscJedzonka(liczba){
 	return liczba;
 }
-function setSzczupakCount(liczba){
-	return liczba;
+function setSzczupakCount(){
+	return parseInt(document.getElementById("poleSzczupaki").value);
 }
 function setGranieNaCzekanie(liczba){
 	return liczba;
 }
 
 function start(){
-	console.log("xd");
+    karasCount = setKarasCount();
+    karasie = new Family(karasCount);
+    iloscJedzonka = setiloscJedzonka(60);
+    hasie = new Hasie();
+    szczupakCount = setSzczupakCount();
+    bandaSzczupakow = new Banda(szczupakCount);
+    granieNaCzekanie = setGranieNaCzekanie(200);
+    maxKarasChildren = 5;
+
+    console.log("xd");
 	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
