@@ -1,5 +1,5 @@
 var stage = new createjs.Stage("demoCanvas");
-var background = new createjs.Bitmap("js/karas.png");
+var background = new createjs.Bitmap("img/karas.png");
 
 var count = 10;
 var karasie = new Family(count);
