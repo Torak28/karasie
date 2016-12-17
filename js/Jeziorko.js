@@ -1,5 +1,4 @@
 var stage = new createjs.Stage("demoCanvas");
-
 var background = new createjs.Bitmap("img/jeziorko.png");
 
 var karasCount = setKarasCount(20);
@@ -26,10 +25,8 @@ function setGranieNaCzekanie(liczba){
 	return liczba;
 }
 
-function start(){
-
-
-
+function init(){
+	console.log("xd");
 	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
@@ -73,7 +70,7 @@ function checkCollisions(karas) {
 			if(bornKarasie < maxBornKarasiePerTick) {
 
 				if (karas.eatenHasie > 1 && !karas.justMadeChildren && karasie.family[i].eatenHasie > 1 && !karasie.family[i].justMadeChildren) {
-					karasie.addKaras();
+					//karasie.addKaras();
 					karas.justMadeChildren = true;
 					karasie.family[i].justMadeChildren = true;
 				}
