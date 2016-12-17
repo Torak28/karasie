@@ -6,7 +6,7 @@ var karasCount = setKarasCount(20);
 var karasie = new Family(karasCount);
 var iloscJedzonka = setiloscJedzonka(30);
 var hasie = new Hasie();
-var szczupakCount = setSzczupakCount(2);
+var szczupakCount = setSzczupakCount(4);
 var bandaSzczupakow = new Banda(szczupakCount);
 var granieNaCzekanie = setGranieNaCzekanie(200);
 
