@@ -85,7 +85,7 @@ h3{
     padding-top: 70px;
 }
 
-p{
+#intro p, #fisz2 p{
     text-align: justify;
     padding-top: 50px;
     font-size: 24px;
@@ -124,15 +124,19 @@ blockquote cite:before {
 }
 
 #buttonInitCol{
-    margin-top: 80px;
+    margin-top: 30px;
 }
 
 #buttonInit{
     width: 150px;
 }
 
-#panelInit{
-    margin-top: 150px;
+#sim{
+    padding-bottom: 30px;
+}
+
+#inputKarasCol p, #inputSzczupakCol p{
+    font-size: 20px;
 }
 /*----media queries---*/
 
