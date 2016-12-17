@@ -2,10 +2,13 @@
  * Created by piotrek on 17.12.16.
  */
 function Szczupak(trgtX, trgtY, X, Y){
-	this.szczupakShape = new createjs.Shape();
-	this.szczupakShape.graphics.beginFill("Yellow").drawCircle(0, 0, 8).endFill();
+    this.szczupakShape = new createjs.Bitmap("js/zymbok.png");
 	this.szczupakShape.x = X;
 	this.szczupakShape.y = Y;
+
+	this.szczupakShape.scaleX = 0.17;
+	this.szczupakShape.scaleY = 0.17;
+
 
 	this.id = 0;
 	this.alive = true;
