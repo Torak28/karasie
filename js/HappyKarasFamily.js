@@ -23,7 +23,7 @@ function Family(karasCount) {
         console.log("addkaras func");
         var position = getRandomTarget();
         var target = getRandomTarget();
-         //Jeśli są jakieś martwe karsie to je ożywiamy
+        //Jeśli są jakieś martwe karsie to je ożywiamy
         var added = false;
         for(var i=0; i<karasCount; i++){
             var alive = this.family[i].alive;
