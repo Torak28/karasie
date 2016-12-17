@@ -10,7 +10,7 @@ function Hasie(){
     }
     this.size = this.family.length;
 
-    this.updateHasie = function (steps) {
+    this.updateHasie = function () {
         for(var i = 0; i < this.family.length; i++) {
             if(this.family[i].zjedzony) {
                 stage.removeChild(this.family[i].hasShape);

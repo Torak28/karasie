@@ -1,28 +1,27 @@
 /**
  * Created by piotrek on 17.12.16.
  */
-function Karas(trgtX, trgtY, X, Y){
-    this.karasShape = new createjs.Shape();
-    this.karasShape.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 5).endFill();
-    this.karasShape.x = X;
-    this.karasShape.y = Y;
+function Szczupak(trgtX, trgtY, X, Y){
+    this.szczupakShape = new createjs.Shape();
+    this.szczupakShape.graphics.beginFill("Yellow").drawCircle(0, 0, 8).endFill();
+    this.szczupakShape.x = X;
+    this.szczupakShape.y = Y;
 
     this.id = 0;
     this.alive = true;
-    this.ticksToDeath = 50 + parseInt(Math.random()*200);
-    this.dodatek = 50;
+    this.ticksToDeath = 150 + parseInt(Math.random()*200);
 
     this.targetX = trgtX;
     this.targetY = trgtY;
     this.distFromTarget = function() {
-        var vecX = this.targetX - this.karasShape.x;
-        var vecY = this.targetY  - this.karasShape.y;
+        var vecX = this.targetX - this.szczupakShape.x;
+        var vecY = this.targetY  - this.szczupakShape.y;
         return Math.sqrt(vecX*vecX + vecY+vecY);
     };
 
     this.updatePosition = function (steps) {
         if(this.alive){
-            var foodAround = findHasie(this);
+            var foodAround = findKarasie(this);
             var hasOnLock = false;
             if( foodAround[0] != -1){
                 this.targetX = foodAround[0];
@@ -30,34 +29,34 @@ function Karas(trgtX, trgtY, X, Y){
                 hasOnLock = true;
             }
             if(hasOnLock)
-                eatHas(this);
+                eatKaras(this);
 
             var moveVector = this.getMoveVector();
             //wykonujemy ruch
-            this.karasShape.x += moveVector[0]*steps;
-            this.karasShape.y += moveVector[1]*steps;
+            this.szczupakShape.x += moveVector[0]*steps;
+            this.szczupakShape.y += moveVector[1]*steps;
 
             var dist = this.distFromTarget();
-            var collision = checkCollisions(this);
+            var collision = checkSzczupakCollisions(this);
 
             while(collision){
                 //cofamy ruch bo kolizja
-                this.karasShape.x -= moveVector[0]*steps;
-                this.karasShape.y -= moveVector[1]*steps;
+                this.szczupakShape.x -= moveVector[0]*steps;
+                this.szczupakShape.y -= moveVector[1]*steps;
 
                 var nTarget = getRandomTarget();
                 this.targetX = nTarget[0];
                 this.targetY = nTarget[1];
 
                 moveVector = this.getMoveVector();
-                this.karasShape.x += moveVector[0]*steps;
-                this.karasShape.y += moveVector[1]*steps;
+                this.szczupakShape.x += moveVector[0]*steps;
+                this.szczupakShape.y += moveVector[1]*steps;
 
                 dist = this.distFromTarget();
-                collision = checkCollisions(this);
+                collision = checkSzczupakCollisions(this);
             }
 
-            while(dist < 5.0 && !hasOnLock){
+            while(dist < 7.0 && !hasOnLock){
                 var newTarget = getRandomTarget();
                 this.targetX = newTarget[0];
                 this.targetY = newTarget[1];
@@ -71,8 +70,8 @@ function Karas(trgtX, trgtY, X, Y){
     }
 
     this.getMoveVector = function (){
-        var vectorX = this.targetX - this.karasShape.x;
-        var vectorY = this.targetY - this.karasShape.y;
+        var vectorX = this.targetX - this.szczupakShape.x;
+        var vectorY = this.targetY - this.szczupakShape.y;
 
         var len = Math.sqrt(vectorX*vectorX + vectorY*vectorY);
         vectorX = vectorX / len;

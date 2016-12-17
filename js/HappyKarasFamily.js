@@ -14,7 +14,6 @@ function Family(karasCount) {
         for(var i = 0; i < this.family.length; i++){
             this.family[i].updatePosition(steps);
             if(!this.family[i].alive){
-                var it = this.family[i].id;
                 stage.removeChild(this.family[i].karasShape);
             }
         }
