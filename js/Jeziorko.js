@@ -9,6 +9,7 @@ var szczupakCount = setSzczupakCount();
 var bandaSzczupakow = new Banda(szczupakCount);
 var granieNaCzekanie = setGranieNaCzekanie(200);
 var maxKarasChildren = 5;
+var maxSzczupakChildren = 2;
 
 function setKarasCount(){
 	return parseInt(document.getElementById("poleKarasie").value);
@@ -83,7 +84,7 @@ function checkCollisions(karas) {
 				}
 
 			//console.log("distance " + dist);
-			console.log("Zderzenie!");
+			//console.log("Zderzenie!");
 			return true;
 		}
 
@@ -105,8 +106,14 @@ function checkSzczupakCollisions(szczupak) {
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
 		if(dist<=14.0){
-			//console.log("distance " + dist);
-			//console.log("Zderzenie!");
+			console.log("Zderzenie szczupaków");
+            if(szczupak.childrenMade < maxSzczupakChildren){
+                if (szczupak.eatenKarasie > 15 && bandaSzczupakow.family[i].eatenKarasie > 15) {
+                    bandaSzczupakow.addSzczupak();
+                    szczupak.childrenMade++;
+                    bandaSzczupakow.family[i].childrenMade++;
+                }
+                }
 			return true;
 		}
 
@@ -175,15 +182,16 @@ function eatKaras(szczupak) {
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
 		if(dist<=3.0 && szczupak.canEat) {
-			console.log("Szczupak je");
+			//Szczupak je
 			karasie.family[i].alive = false; //R.I.P ; <
 			karasie.family[i].ticksToDeath = 0;
-			//karasie.updateFamily();
+
 			szczupak.canEat=false;
+			szczupak.eatenKarasie++;
 			szczupak.ticksToDeath += karasie.family[i].dodatek;
 			return true;
 		}
-        console.log("Szczupak nie je");
+        //Szczupak nie je
 		szczupak.canEat=true;
 	}
 	return false;
