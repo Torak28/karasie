@@ -1,14 +1,14 @@
 var stage = new createjs.Stage("demoCanvas");
-var karasCount = 20;
+var karasCount = setKarasCount(20);
 var karasie = new Family(karasCount);
 var iloscJedzonka = setiloscJedzonka(20);
 var hasie = new Hasie();
-var szczupakCount = 3;
+var szczupakCount = setSzczupakCount(3);
 var bandaSzczupakow = new Banda(szczupakCount);
-var granieNaCzekanie = 200;
+var granieNaCzekanie = setGranieNaCzekanie(200);
 
 function setKarasCount(liczba){
-	return liczba
+	return liczba;
 }
 function setiloscJedzonka(liczba){
 	return liczba;
