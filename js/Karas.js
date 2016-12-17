@@ -7,8 +7,9 @@ function Karas(trgtX, trgtY, X, Y){
     this.karasShape.x = X;
     this.karasShape.y = Y;
 
+    this.id = 0;
     this.alive = true;
-    this.ticksToDeath = 50 + parseInt(Math.random()*200);
+    this.ticksToDeath = 1000;
 
     this.targetX = trgtX;
     this.targetY = trgtY;
@@ -19,15 +20,14 @@ function Karas(trgtX, trgtY, X, Y){
     };
 
     this.updatePosition = function (steps) {
-        console.log(this.alive);
         if(this.alive){
             var moveVector = this.getMoveVector();
             this.karasShape.x += moveVector[0]*steps;
             this.karasShape.y += moveVector[1]*steps;
 
             var dist = this.distFromTarget();
-
-            while(dist < 5.0){
+            var collision = checkCollisions(this);
+            while(dist < 5.0 ){
                 var newTarget = getRandomTarget();
                 this.targetX = newTarget[0];
                 this.targetY = newTarget[1];
@@ -35,7 +35,6 @@ function Karas(trgtX, trgtY, X, Y){
             }
 
             this.ticksToDeath--;
-            console.log(this.ticksToDeath);
             if(this.ticksToDeath == 0)
                 this.alive = false;
         }

@@ -7,6 +7,7 @@ function Family(karasCount) {
         var position = getRandomTarget();
         var target = getRandomTarget();
         this.family[i] = new Karas(target[0],target[1],position[0],position[1]);
+        this.family[i].id = i;
     }
     console.log(this.family[0]);
     this.updateFamily = function (steps) {
