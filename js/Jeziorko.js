@@ -28,7 +28,7 @@ function setGranieNaCzekanie(liczba){
 
 function start(){
 
-    createjs.Ticker.addEventListener("tick", handleTick);
+
 
 	stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
@@ -45,6 +45,7 @@ function start(){
 
 
 	spawnHas();
+    createjs.Ticker.addEventListener("tick", handleTick);
 	stage.update();
 	//Update stage will render next frame
 }
