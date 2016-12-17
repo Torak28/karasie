@@ -25,9 +25,9 @@ $(document).ready(function (){
 });
 
 $(document).ready(function (){
-    $("#buttonFisz3").click(function (){
+    $("#buttonFisz2").click(function (){
         $('html, body').animate({
-            scrollTop: $("#fisz3").offset().top
+            scrollTop: $("#fisz2").offset().top
         }, 1000);
     });
 });
