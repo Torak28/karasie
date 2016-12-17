@@ -12,7 +12,7 @@ function Szczupak(trgtX, trgtY, X, Y){
 
 	this.id = 0;
 	this.alive = true;
-	this.ticksToDeath = 150 + parseInt(Math.random()*200);
+	this.ticksToDeath = 200 + parseInt(Math.random()*200);
 
 	this.targetX = trgtX;
 	this.targetY = trgtY;
