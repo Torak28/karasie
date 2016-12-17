@@ -1,14 +1,26 @@
 var stage = new createjs.Stage("demoCanvas");
-
 var karasCount = 20;
 var karasie = new Family(karasCount);
-var iloscJedzonka = 15;
+var iloscJedzonka = setiloscJedzonka(20);
 var hasie = new Hasie();
 var szczupakCount = 3;
 var bandaSzczupakow = new Banda(szczupakCount);
+var granieNaCzekanie = 200;
+
+function setKarasCount(liczba){
+	return liczba
+}
+function setiloscJedzonka(liczba){
+	return liczba;
+}
+function setSzczupakCount(liczba){
+	return liczba;
+}
+function setGranieNaCzekanie(liczba){
+	return liczba;
+}
 
 function init(){
-
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
 	}
@@ -151,7 +163,7 @@ function eatKaras(szczupak) {
 }
 
 function spawnHas() {
-	console.log("spawn");
+	//console.log("spawn");
 	hasie.addHas();
 }
 

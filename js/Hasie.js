@@ -14,13 +14,13 @@ function Hasie(){
 		for(var i = 0; i < this.family.length; i++) {
 			if(this.family[i].zjedzony) {
 				stage.removeChild(this.family[i].hasShape);
-				console.log("xd")
+				//console.log("xd")
 			}
 		}
 	}
 
 	this.addHas = function(){
-		console.log(this.family[0]);
+		//console.log(this.family[0]);
 		var position = getRandomTarget();
 		for(var i =0; i< iloscJedzonka; i++) {
 			var zjedzony = this.family[i].zjedzony;
@@ -32,6 +32,6 @@ function Hasie(){
 				break;
 			}
 		}
-		setTimeout(spawnHas,400);
+		setTimeout(spawnHas,granieNaCzekanie);
 	}
 }
