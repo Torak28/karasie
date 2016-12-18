@@ -2,7 +2,9 @@
  * Created by piotrek on 17.12.16.
  */
 function Szczupak(trgtX, trgtY, X, Y){
-    this.szczupakShape = new createjs.Bitmap("img/zymbok.png");
+    //this.szczupakShape = new createjs.Bitmap("img/zymbok.png");
+	this.szczupakShape = new createjs.Shape();
+	this.szczupakShape.graphics.beginFill("yellow").drawCircle(0,0,30).endFill();
 	this.szczupakShape.x = X - 8;
 	this.szczupakShape.y = Y - 8;
 	this.canEat = true;

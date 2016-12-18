@@ -1,5 +1,5 @@
 var stage = new createjs.Stage("demoCanvas");
-var background = new createjs.Bitmap("img/jeziorko.png");
+//var background = new createjs.Bitmap("img/jeziorko.png");
 
 var karasCount = setKarasCount();
 var karasie = new Family(karasCount);
@@ -35,7 +35,7 @@ function start(){
     maxKarasChildren = 5;
 
     console.log("xd");
-	stage.addChild(background);
+	//stage.addChild(background);
 	for(var i=0; i< karasCount; i++){
 		stage.addChild(karasie.family[i].karasShape);
 	}
@@ -74,7 +74,7 @@ function checkCollisions(karas) {
 		var dy = karas.karasShape.y - karasie.family[i].karasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=10.0){
+		if(dist<=30.0){
 				if(karas.childrenMade < maxKarasChildren){
                     if (karas.eatenHasie > 1 && karasie.family[i].eatenHasie > 1) {
                         karasie.addKaras();
@@ -105,7 +105,7 @@ function checkSzczupakCollisions(szczupak) {
 		var dy = szczupak.szczupakShape.y - bandaSzczupakow.family[i].szczupakShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=14.0){
+		if(dist<=60.0){
 			console.log("Zderzenie szczupaków");
             if(szczupak.childrenMade < maxSzczupakChildren){
                 if (szczupak.eatenKarasie > 15 && bandaSzczupakow.family[i].eatenKarasie > 15) {
@@ -131,7 +131,7 @@ function findHasie(karas) {
 		var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=100.0)
+		if(dist<=150.0)
 			return [hasie.family[i].hasShape.x, hasie.family[i].hasShape.y ];
 
 	}
@@ -147,7 +147,7 @@ function findKarasie(szczupak) {
 		var dy = szczupak.szczupakShape.y - karasie.family[i].karasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=50.0)
+		if(dist<=100.0)
 			return [karasie.family[i].karasShape.x, karasie.family[i].karasShape.y ];
 
 	}
@@ -161,7 +161,7 @@ function eatHas(karas) {
 		var dy = karas.karasShape.y - hasie.family[i].hasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=3.0) {
+		if(dist<=10.0) {
 			hasie.family[i].zjedzony = true;
 			hasie.updateHasie();
 			karas.ticksToDeath += hasie.family[i].dodatek;
@@ -181,7 +181,7 @@ function eatKaras(szczupak) {
 		var dy = szczupak.szczupakShape.y - karasie.family[i].karasShape.y;
 		var dist = Math.sqrt(dx*dx + dy*dy);
 
-		if(dist<=3.0 && szczupak.canEat) {
+		if(dist<=15.0 && szczupak.canEat) {
 			//Szczupak je
 			karasie.family[i].alive = false; //R.I.P ; <
 			karasie.family[i].ticksToDeath = 0;
